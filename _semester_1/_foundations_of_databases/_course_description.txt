@@ -1,0 +1,22 @@
+Course description
+
+Docente: Andrés M. Castillo
+Correo: andres.m.castillo@correounivalle.edu.co
+Oficina: 2105
+Horario de atención: Viernes de 11 am a 1 pm
+
+Evaluación
+2 Artículos (50) *
+
+Revisión del estado del arte sobre bases de datos
+Reseña o revisión sobre: SQL, NoSQL y NewSQL ó Minería de datos en grandes datos
+Exposiciones (30) **
+
+Individual tema libre relacionado con bases de datos y su proyecto de investigación. (30 minutos)
+En parejas sobre un artículo especializado. (45 minutos)
+Examen final (20%)
+
+Examen teóríco de los temas del curso
+* Los artículos serán evaluados por 3 pares (dos compañeros y el profesor). La nota final es la ponderación de las notas de los 3 avaluadores
+
+** La nota final se dará al final de la exposición y será el promedio ponderado de la nota de los asistentes
