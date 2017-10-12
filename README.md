@@ -1,1 +1,1 @@
-# CSmaster
+# Computer Science master
