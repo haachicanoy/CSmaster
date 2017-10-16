@@ -1,0 +1,31 @@
+1. Descriptores, palabras clave: image recognition, cropland mapping, remote sensing
+TITLE-ABS-KEY("cropland mapping") OR TITLE-ABS-KEY(image recognition) [AND]
+TITLE-ABS-KEY("cropland mapping") OR TITLE-ABS-KEY(remote sensing) OR TITLE-ABS-KEY("common bean") OR TITLE-ABS-KEY("image classification") [AND]
+
+(TITLE-ABS-KEY("cropland mapping") OR TITLE-ABS-KEY("remote sensing")) AND TITLE-ABS-KEY("bean landrace")
+(TITLE-ABS-KEY("cropland mapping") OR TITLE-ABS-KEY("remote sensing")) AND TITLE-ABS-KEY("landrace")
+TITLE-ABS-KEY("remote sensing") AND TITLE-ABS-KEY("landrace")
+TITLE-ABS-KEY("recognition") AND TITLE-ABS-KEY("landrace")
+
+(TITLE-ABS-KEY("cropland mapping") OR TITLE-ABS-KEY(remote AND sensing)) AND TITLE-ABS-KEY("common bean")
+(TITLE-ABS-KEY("cropland mapping") OR TITLE-ABS-KEY("remote sensing")) AND TITLE-ABS-KEY("common bean")
+
+vegetation or crop type
+
+SRCTITLE para filtrar por revistas
+(TITLE-ABS-KEY("cropland mapping") OR TITLE-ABS-KEY("remote sensing")) AND SRCTITLE("IEEE Journal of selected topics in Applied Earth Observations and Remote Sensing")
+
+
+landrace mapping remote sensing
+
+
+2. Quienes son los investigadores
+3. Grupos de investigación nacional-internacional
+
+Mate
+
+-embergerQ
+-monthCountByTemp10
+-topoWet
+
+[paper]-Soares et al, Crop area estimate from original spatial resolution
