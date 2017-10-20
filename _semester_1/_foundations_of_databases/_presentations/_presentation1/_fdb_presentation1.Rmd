@@ -1,0 +1,215 @@
+---
+title: "An overview of query optimization in relational systems <br> Surajit Chaudhuri (1998)"
+author: "Harold Achicanoy"
+date: "Sept 20, 2017"
+output: ioslides_presentation
+incremental: true
+---
+
+## About the author{.centered}
+
+![Surajit Chaudhuri](./images/Surajit_Chaudhuri.jpg)\n
+
+<font color="black">
+
+Computer Scientist at Microsoft Research
+
+Best known for his contributions to database management systems
+
+Research group: Data Management, Exploration and Mining group
+
+</font>
+
+## Outline
+
+<font color="black">
+
+- **Introduction**
+- **Query optimization**
+- Search space
+- Cost estimation
+- Enumeration algorithm
+- **Example: System-R optimizer**
+- **Conclusions**
+
+</font>
+
+## Relational DBMS components{.centered}
+
+![Relational DBMS components](./images/DBMS_components.png)\n
+
+## General view{.centered}
+
+![](./images/query_optimization.png)\n
+
+## Query optimization
+
+<font color="black">
+
+Issues to consider:
+
+- Large number of possible execution plans for a query
+- Response times for the execution of these plans may be widely different
+- The choice of an execution by the optimizer is of critical importance
+
+</font>
+
+## Query optimization
+
+<font color="black">
+
+It could be considered as a search problem among all possible execution plans.
+
+- **Search space**: Set of possible plans which can be related to some algebraic transformation
+- **Cost estimation**: Needs to be measured in terms of CPU time, memory, I/O cost, etc. And also, the estimation should be both accurate and efficient.
+- **Enumeration algorithm**: This algorithm can search through the execution space.
+
+This paper just focused on Select-Project-Join (SPJ) queries, because of their closely relation with the conjunctive queries.
+
+</font>
+
+## Desirable optimizer
+
+<font color="black">
+
+- Its search space includes plans that have low cost
+- The costing technique is accurate
+- The enumerating algorithm is efficient
+
+</font>
+
+## Query evaluation{.centered}
+
+![Relational DBMS components](./images/DBMS_components.png)\n
+
+## Query evaluation
+
+<font color="black">
+
+- **Query optimizer**: Generate the input for the execution engine so that it executes efficiently.
+- **Query execution engine**: Operators for the execution of operations such as sort, sequential scan, index scan, etc.
+
+</font>
+
+## Search space: Queries as trees{.centered}
+
+<font color="black">
+
+Execution plan = Physical operator tree
+
+![Operator tree](./images/operator_tree.png)\n
+
+</font>
+
+## Search space: Queries as trees{.centered}
+
+![Operator tree](./images/query_representations.png)\n
+
+## Search space
+
+<font color="black">
+
+Depends on the set of algebraic transformations that preserve equivalence and the set of physical operators supported in an optimizer.
+
+- Commuting between operators
+- Reducing multi-block queries to single-block
+- Using semijoin like techniques for optimizing multi-block queries
+
+</font>
+
+## Search space: Commuting between operators{.centered}
+
+<font color="black">
+
+![Operator tree](./images/commutative.png)\n
+
+</font>
+
+## Search space: Reducing multi-block queries to single-block{.centered}
+
+<font color="black">
+
+![Multiblock](./images/multiblock.png)\n
+
+</font>
+
+## Search space: Using semijoin like techniques for optimizing multi-block queries
+
+<font color="black">
+
+- Exploit selectivity of predicates across blocks
+- Requires introducing new table expressions and views
+- The goal is to avoid redundant computation in the views or the nested subqueries
+
+</font>
+
+## Cost estimation{.centered}
+
+<font color="black">
+
+Which of the operator trees consumes least resources?
+
+![Operator tree](./images/cost.png)\n
+
+</font>
+
+## Cost estimation{.centered}
+
+<font color="black">
+
+![Operator tree](./images/cost_estimation.png)\n
+
+</font>
+
+## Enumeration algorithm
+
+<font color="black">
+
+Build the enumerator that can adapt to changes:
+
+- In search space due to addition of new transformations
+- The addition of new physical operators
+- Changes in the cost estimation techniques
+
+Recent optimization architectures have been built with this paradigm: *extensible optimizers*.
+
+</font>
+
+## Enumeration algorithm: extensible optimizers
+
+<font color="black">
+
+Starburst and Volcano/Cascade properties in common
+
+- Use of generalized cost functions and physical properties with operator
+- Use of a rule engine that allows transformations to modify the query expression or the operator trees
+- Many exposed "knobs" that can be used to tune the behavior of the system
+
+</font>
+
+## Example: System-R optimizer{.centered}
+
+<font color="black">
+
+![System-R optmizer](./images/systemr1.png)\n
+
+</font>
+
+## Example: System-R optimizer{.centered}
+
+<font color="black">
+
+![System-R optmizer2](./images/systemr2.png)\n
+
+</font>
+
+## Conclusions
+
+<font color="black">
+
+- Optimization is much more than transformations and query equivalence
+- Design effective and correct SQL transformations is not easy
+- Develop a robust cost metric is elusive
+- Build an enumeration algorithm is a significant undertaking
+
+</font>

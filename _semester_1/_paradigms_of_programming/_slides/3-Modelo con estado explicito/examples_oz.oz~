@@ -1,0 +1,29 @@
+%%%%% Funcion que suma una lista de valores
+declare
+fun {SumList Xs S}
+   case Xs of nil then S
+   [] X|Xr then {SumList Xr X+S}
+   end
+end
+Y = [1 2 3 4 5 6]
+S = 0
+{Show {SumList Y S}}
+
+%%%%% Funcion que suma una lista de valores con estado
+declare SumList ContadorSum
+local
+   C = {NewCell 0}
+in
+   fun {SumList Xs S}
+      C:=@C+1
+      case Xs of nil then S
+      [] X|Xr then {SumList Xr X+S}
+      end
+   end
+   fun {ContadorSum} @C end
+   proc {InicContador} C:=0 end
+end
+{Browse {SumList [1 2 3 4] 0}}
+{Browse {ContadorSum}}
+{InicContador}
+{Browse {ContadorSum}}
