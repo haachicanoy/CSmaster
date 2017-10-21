@@ -1,0 +1,246 @@
+% Punto 2
+% Harold Armando Achicanoy Estrella
+
+% Version 1: base
+declare
+fun {Q A B}
+   C={NewCell 0} in
+   if A<B then
+      fun {GenList From To}
+	 if From < To+1 then From|{GenList From+1 To}
+	 else nil end
+      end
+      MyList = {GenList A B}
+      for D in A..B do C:=(D+1) end @C
+   elseif A==B then A end
+end
+{Browse {Q 1 1}}
+
+% Version 2: better one
+declare
+fun {Q A B}
+   C={NewCell 0}
+   fun {GenList From To}
+      if From < To+1 then From|{GenList From+1 To}
+      else nil end
+   end
+   MyList = {GenList A B}
+in
+   if A<B then
+      for D in MyList % MyList.1..{List.length MyList}
+      do
+	 C:=asxaxas
+      end
+      @C
+   elseif A==B then A end
+end
+{Browse {Q 1 10}}
+
+% Version 3: another better one
+declare
+fun {GenList From To}
+      if From < To+1 then From|{GenList From+1 To}
+      else nil end
+end
+MyList
+Sum
+fun {Q A B}
+   MyList = {GenList A B} % declare MyList = {GenList 0 5}
+   local
+      fun {Sum MyList}
+	 R = {NewCell 0}
+	 Input = {NewCell MyList}
+	 proc {Sum}
+	    case @Input of nil then skip
+	    [] H|List then
+	       R:=@R + H
+	       Input:=MyList
+	       {Sum}
+	    end
+	 end
+      in
+	 {Sum}
+	 @R
+      end
+   end
+end
+
+
+
+
+
+local
+   fun {GenList From To}
+      if From < To+1 then From|{GenList From+1 To}
+      else nil end
+   end
+   MyList = {GenList A B}
+in
+fun {Q A B}
+   fun {Sum MyList}
+      R = {NewCell 0}
+      Input = {NewCell MyList}
+      proc {Sum}
+	 case @Input of nil then skip
+	 [] H|List then
+	    R:=@R + H
+	    Input:=MyList
+	    {Sum}
+	 end
+      end
+   in
+      {Sum}
+      @R
+   end
+end
+{Browse {Q 1 10}}
+
+
+
+
+
+% Test functions
+local
+      fun {GenList From To}
+	 if From < To+1 then From|{GenList From+1 To}
+	 else nil end
+      end
+      MyList = {GenList 1 5}
+in
+   {Browse MyList}
+end
+
+{For 1 11 3 Browse}
+
+declare
+L = [1 2 3 4 5]
+fun {Test L}
+   for E in L do
+      {Browse L}
+   end
+end
+{Test L}
+
+
+declare
+fun {CalcSum List}
+   Output = {NewCell 0}
+   Input = {NewCell List}
+   proc {CalcSum}
+      case @Input of nil then skip
+      [] H|List then
+	 Output := @Output + H
+	 Input := List
+	 {CalcSum} end end in
+   {CalcSum}
+   @Output
+end
+{Browse {CalcSum [1 2 3 4 5]}}
+
+
+
+
+
+
+
+
+local
+   GenList MyList CalcSum
+in
+   fun {Q A B}
+
+      if A<B then
+	 fun {GenList From To}
+	    if From < To+1 then From|{GenList From+1 To}
+	    else nil end
+	 end
+	 MyList = {GenList A B}
+	 fun {CalcSum List}
+	    Output = {NewCell 0}
+	    Input = {NewCell List}
+	    proc {CalcSum}
+	       case @Input of nil then skip
+	       [] H|List then
+		  Output := @Output + H
+		  Input := List
+		  {CalcSum} end end in
+	    {CalcSum}
+	    @Output
+	 end
+	 {CalcSum MyList}
+      elseif A==B then A end
+   end
+end
+
+{Browse {Q 1 3}}
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+declare
+fun {Q A B}
+   local
+      fun {GenList From To}
+	 if From < To+1 then From|{GenList From+1 To}
+	 else nil end
+      end
+      fun {CalcSum List}
+	 Output = {NewCell 0}
+	 Input = {NewCell List}
+	 proc {CalcSum}
+	    case @Input of nil then skip
+	    [] H|T then
+	       Output := @Output + H
+	       Input := T
+	       {CalcSum} end end in
+	 {CalcSum}
+	 @Output
+      end
+   in
+      if A<B then
+	 MyList = {GenList A B}
+	 {CalcSum MyList}
+      elseif A==B then A end
+   end
+end
+{Browse {Q 1 4}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+local
+   GenList MyList CalcSum
+in
+   fun {Q A B}
+
+      if A<B then
+	 fun {GenList From To}
+	    if From < To+1 then From|{GenList From+1 To}
+	    else nil end
+	 end
+	 MyList = {GenList A B}
+	 fun {CalcSum List}
+	    Output = {NewCell 0}
+	    Input = {NewCell List}
+	    proc {CalcSum}
+	       case @Input of nil then skip
+	       [] H|List then
+		  Output := @Output + H
+		  Input := List
+		  {CalcSum} end end in
+	    {CalcSum}
+	    @Output
+	 end
+	 {CalcSum MyList}
+      elseif A==B then A end
+   end
+end

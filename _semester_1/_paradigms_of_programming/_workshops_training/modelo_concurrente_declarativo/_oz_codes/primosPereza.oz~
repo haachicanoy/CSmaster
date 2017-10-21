@@ -1,0 +1,132 @@
+% Punto 8
+
+declare
+fun lazy {Gen I}
+   I|{Gen I+1}
+end
+fun lazy {LFilter L F}
+   case L of nil then nil
+   [] X|L2 then
+      if {F X} then X|{LFilter L2 F}
+      else {LFilter L2 F}
+      end
+   end
+end
+fun lazy {Primes Xs}
+   X|Xr=Xs in
+   X|{Primes {LFilter Xr fun {$ Y} Y mod X \=0 end}}
+end
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+declare
+PrimesList = {Primes {Gen 23}}
+{Browse PrimesList}
+{Browse {List.nth PrimesList 16}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+declare Y
+{ByNeed proc {$ A} A=111*111 end Y}
+{Wait Y}
+{Browse Y}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+declare
+I=2
+PrimesList
+Y
+fun {ShowPrimes N}
+   PrimesList = {Primes {Gen I}}
+   Y = {ByNeed {List.nth PrimesList N}}
+end
+
+{Browse {ShowPrimes 12}}
+
+declare I=2 PList Z Res
+fun {ShowPrimes N}
+   local N in
+      PList = {Primes {Gen I}}
+      Z = {List.nth PList N}
+      Res = PList
+   end
+end
+
+{Browse {ShowPrimes 18 2}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+declare I=2 PrimesList
+fun {ShowPrimes N}
+   PrimesList = {Primes {Gen I}}
+   fun {CreateList PList To}
+      if To < 1 then nil
+      else
+	 case PList of H|T then H|{CreateList T To} end
+      end
+   end
+   {CreateList PrimesList N}
+end
+
+{CreateList }
+
+
+
+
+
+declare
+fun {Generar N Limite}
+   if N<Limite then
+      N|{Generar N+1 Limite}
+   else nil end
+end
+
+declare
+fun {ShowPrimes N}
+   local Xs Ys I=2 in
+      thread Xs = {Generar 1 100} end
+      thread Ys = {Primes {Gen I}} end
+      {}

@@ -1,0 +1,28 @@
+---
+title: "**Taller de programación con estado**"
+author: "Harold Armando Achicanoy Estrella"
+date: "October 22, 2017"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Punto 1
+
+## **Literal a).** `{Show A==B}`
+
+El resultado producido al generar la invocación correspondiente es: `false`. Esto ocurre debido a que las celdas `A` y `B` desde el momento de su creación son diferentes. Aún cuando tienen el mismo contenido la comparación que se está realizando es entre celdas por ende no son iguales.
+
+## **Literal b).** `{Show T1==T2}`
+
+El resultado generado es `true`. Dado que inicialmente se realiza la asignación `T1=@A` y `T2=@B`. Estas se comparan en términos de su contenido, por tanto, como `T1` y `T2` son iguales a 0, la comparación genera una igualdad entre las dos variables declarativas.
+
+## **Literal c).** `{Show T1=T2}`
+
+El presente resultado es 0. Esto ocurre debido a que se pretende realizar la asignación de la variable declarativa `T1` con el contenido de la variable `T2`. No obstante, como ambas tienen el mismo contenido, al final la ejecución del código arroja como resultado el valor que comparten en común.
+
+## **Literal d).** `A:=@B; {Show A==B}`
+
+El resultado producido es `false`. Aquí una vez se actualiza el contido de la celda `A` por el contenido de la celda `B`. Se busca comparar si las celdas `A` y `B` son iguales, no obstante, como las celdas se comparan en función de su totalidad y no de su contenido el resultado generado es `false`.

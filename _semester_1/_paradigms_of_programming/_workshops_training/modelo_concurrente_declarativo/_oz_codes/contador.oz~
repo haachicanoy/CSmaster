@@ -1,0 +1,28 @@
+% Punto 4
+% Harold Armando Achicanoy Estrella
+
+declare
+Xs = a|b|c|d|a|a|b
+fun {CountChar X}
+   case X of nil then nil
+   [] X1 then 1 end
+end
+{Browse {CountChar Xs.1}}
+{Browse Xs}
+declare
+fun {Counter Xs}
+   case Xs of nil then nil
+   [] X|Xr then Ys in
+      thread Ys = X#{CountChar X}|{Counter Xr} end
+   end
+end
+{Browse {Counter Xs}}
+
+
+
+local
+   InS
+in
+   {Browse {Counter InS}}
+   InS = a|b|c|_
+end
