@@ -1,10 +1,21 @@
 % Punto 4
 % Harold Armando Achicanoy Estrella
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 declare
-fun {Fib N}
-   case N of 0 then 1
-   [] 1 then 1
-   else {Fib N-1} + {Fib N-2} end
+fun {CalcFib N}
+   local
+      C={NewCell 1}
+   in
+      if N<2 then @C
+      else
+	 for I in 2..N
+	 do
+	    C:={CalcFib I-1} + {CalcFib I-2}
+	 end
+	 @C
+      end
+   end
 end
-{Browse {Fib 10}}
+{Browse {CalcFib 7}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
