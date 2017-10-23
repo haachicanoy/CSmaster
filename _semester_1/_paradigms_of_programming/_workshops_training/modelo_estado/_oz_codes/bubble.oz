@@ -1,39 +1,42 @@
 % Punto 5
 % Harold Armando Achicanoy Estrella
 
-local
-   fun {Sort Xs}
-      fun {BubbleSort Xs}
-         case Xs
-         of X1|X2|Xr andthen X2 < X1 then X2|{BubbleSort X1|Xr}
-         [] X1|X2|Xr andthen X1 =< X2 then X1|{BubbleSort X2|Xr}
-         [] X|nil then X|nil
-         end
-      end
-
-      fun {Sort Xs I}
-         if I > 0 then {Sort {BubbleSort Xs} I-1}
-         else Xs
-         end
-      end
-   in
-      {Sort Xs {Length Xs}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+declare
+fun {BubbleSort A}
+   Sc={NewCell false} % Initial state condition
+   fun {CalcSort A}
+      for I in 1..({Array.high A}-1)
+      do
+	 if A.(I+1) < A.I then Ip={NewCell 0} in
+	    Ip:=A.I
+	    A.I:=A.(I+1) % Contenido de A.(I+1)
+	    A.(I+1):=@Ip % Contenido de A.I
+	    Sc:=true
+	 end % End if
+      end % End for loop
+      @Sc
+   end % End CalcSort function
+   fun {SimWhile}
+      if {CalcSort A} then {SimWhile} else A end
    end
 in
-   {Browse {Sort [3 4 2 1 5]}}
-end
+   {SimWhile}
+end % End BubbleSort function
 
-procedure bubbleSort( A : list of sortable items )
-    n = length(A)
-    repeat 
-        swapped = false
-        for i = 1 to n-1 inclusive do
-            /* if this pair is out of order */
-            if A[i-1] > A[i] then
-                /* swap them and remember something changed */
-                swap( A[i-1], A[i] )
-                swapped = true
-            end if
-        end for
-    until not swapped
-	  end procedure
+% Test it
+declare
+A = {Array.new 1 5 0}
+A.1:=3
+A.2:=2
+A.3:=4
+A.4:=1
+A.5:=5
+for J in 1..5 do
+   {Browse J#A.J}
+end
+{Browse {BubbleSort A}}
+for J in 1..5 do
+   {Browse J#A.J}
+end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
