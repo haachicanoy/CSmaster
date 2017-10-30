@@ -311,96 +311,40 @@
 % correct bad hyphenation here
 \hyphenation{op-tical net-works semi-conduc-tor}
 
-
 \begin{document}
-%
-% paper title
-% Titles are generally capitalized except for words such as a, an, and, as,
-% at, but, by, for, in, nor, of, on, or, the, to and up, which are usually
-% not capitalized unless they are the first or last word of the title.
-% Linebreaks \\ can be used within to get better formatting as desired.
-% Do not put math or special symbols in the title.
+
 \title{Identification of crop landrace occurrences using remote sensing and classification algorithms}
 
-
-% author names and affiliations
-% use a multiple column layout for up to three different
-% affiliations
 \author{\IEEEauthorblockN{Harold Armando Achicanoy Estrella}
-\IEEEauthorblockA{Maestr\'ia en Ingenier\'ia con \'enfasis en\\
+\IEEEauthorblockA{Taller 1 - Introducci\'on a la Investigaci\'on\\
+Maestr\'ia en Ingenier\'ia con \'enfasis en\\
 Ingenier\'ia de Sistemas y Computaci\'on\\
 Universidad del Valle\\
 Email: harold.achicanoy@correounivalle.edu.co}}
 
-% conference papers do not typically use \thanks and this command
-% is locked out in conference mode. If really needed, such as for
-% the acknowledgment of grants, issue a \IEEEoverridecommandlockouts
-% after \documentclass
-
-% for over three affiliations, or if they all won't fit within the width
-% of the page, use this alternative format:
-% 
-%\author{\IEEEauthorblockN{Michael Shell\IEEEauthorrefmark{1},
-%Homer Simpson\IEEEauthorrefmark{2},
-%James Kirk\IEEEauthorrefmark{3}, 
-%Montgomery Scott\IEEEauthorrefmark{3} and
-%Eldon Tyrell\IEEEauthorrefmark{4}}
-%\IEEEauthorblockA{\IEEEauthorrefmark{1}School of Electrical and Computer Engineering\\
-%Georgia Institute of Technology,
-%Atlanta, Georgia 30332--0250\\ Email: see http://www.michaelshell.org/contact.html}
-%\IEEEauthorblockA{\IEEEauthorrefmark{2}Twentieth Century Fox, Springfield, USA\\
-%Email: homer@thesimpsons.com}
-%\IEEEauthorblockA{\IEEEauthorrefmark{3}Starfleet Academy, San Francisco, California 96678-2391\\
-%Telephone: (800) 555--1212, Fax: (888) 555--1212}
-%\IEEEauthorblockA{\IEEEauthorrefmark{4}Tyrell Inc., 123 Replicant Street, Los Angeles, California 90210--4321}}
-
-
-
-
-% use for special paper notices
-%\IEEEspecialpapernotice{(Invited Paper)}
-
-
-
-
 % make the title area
 \maketitle
 
-% As a general rule, do not put math, special symbols or citations
-% in the abstract
 \begin{abstract}
 The abstract goes here.
 \end{abstract}
 
-% no keywords
-
-
-
-
-% For peer review papers, you can put extra information on the cover
-% page as needed:
-% \ifCLASSOPTIONpeerreview
-% \begin{center} \bfseries EDICS Category: 3-BBND \end{center}
-% \fi
-%
-% For peerreview papers, this IEEEtran command inserts a page break and
-% creates the second title. It will be ignored for other modes.
 \IEEEpeerreviewmaketitle
 
+\section{Introducci\'on}
+La idea inicial del proyecto de investigaci\'on consiste en realizar la clasificaci\'on e identificaci\'on de \'areas donde est\'an presentes variedades criollas de frijol a partir del uso de im\'agenes satelitales. En t\'erminos generales existen dos grandes clases de materiales que se cultivan: por un lado est\'an las variedades de alto rendimiento que se producen a partir de mecanismos de mejoramiento gen\'etico formal, y por otro lado, est\'an las variedades criollas que son mejoradas a partir de procedimientos de selecci\'on natural e intervención de las comunidades locales.
 
+El inter\'es del estudio surge debido a la necesidad de colectar y conservar las variedades criollas dado que estas ofrecen una rica fuente de diversidad gen\'etica que puede ser aprovechada en el mejoramiento gen\'etico formal, transmitiendo caracteres de adaptaci\'on a ciertas condiciones clim\'aticas y como fuente de nutrientes.
 
-\section{Introduction}
-% no \IEEEPARstart
-This demo file is intended to serve as a ``starter file''
-for IEEE conference papers produced under \LaTeX\ using
-IEEEtran.cls version 1.8b and later.
-% You must have at least 2 lines in the paragraph with the drop letter
-% (should never be an issue)
-I wish you the best of success.
+En este sentido, los algoritmos de inteligencia artificial, espec\'ificamente los que se enfocan en el reconocimiento de patrones en im\'agenes, entran a jugar un rol primordial al momento de abordar el problema, dado que al contar con im\'agenes satelitales tomadas en diferentes momentos del tiempo y a partir del conocimiento de la fenolog\'ia del cultivo, es decir, las etapas de desarrollo que abarcan el periodo de siembra hasta cosecha, se necesita construir un algoritmo clasificador que permita \cite{Monteiro:2012}:
 
-\hfill mds
- 
-\hfill August 26, 2015
+\begin{itemize}
+	\item Diferenciar entre \'area sembrada de frijol vs \'area sembrada de otros cultivos.
+	\item Discriminar entre \'area sembrada de variedades de frijol de alto rendimiento vs \'area sembrada de variedades criollas de frijol.
+	\item Aprovechar la informaci\'on espacio-temporal de las im\'agenes satelitales para obtener una clasificaci\'on m\'as precisa.
+\end{itemize}
+
+% \hfill August 26, 2015
 
 \subsection{Subsection Heading Here}
 Subsection text here.
@@ -507,7 +451,7 @@ Subsubsection text here.
 
 
 
-\section{Conclusion}
+\section{Conclusiones}
 The conclusion goes here.
 
 
@@ -517,22 +461,9 @@ The conclusion goes here.
 
 
 % use section* for acknowledgment
-\section*{Acknowledgment}
-
+\section*{Agradecimientos}
 
 The authors would like to thank...
-
-
-
-
-
-% trigger a \newpage just before the given reference
-% number - used to balance the columns on the last page
-% adjust value as needed - may need to be readjusted if
-% the document is modified later
-%\IEEEtriggeratref{8}
-% The "triggered" command can be changed if desired:
-%\IEEEtriggercmd{\enlargethispage{-5in}}
 
 % references section
 
@@ -548,14 +479,14 @@ The authors would like to thank...
 % <OR> manually copy in the resultant .bbl file
 % set second argument of \begin to the number of references
 % (used to reserve space for the reference number labels box)
-\begin{thebibliography}{1}
 
-\bibitem{IEEEhowto:kopka}
-H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
-  0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.
+\bibliography{references}
 
-\end{thebibliography}
+%\begin{thebibliography}{1}
+%\bibitem{IEEEhowto:kopka}
+%H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
+%  0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.
+%\end{thebibliography}
 
-
-% that's all folks
+% That's all folks
 \end{document}

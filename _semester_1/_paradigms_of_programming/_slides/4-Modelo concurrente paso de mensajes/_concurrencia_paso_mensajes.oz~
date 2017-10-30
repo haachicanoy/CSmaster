@@ -1,0 +1,13 @@
+% Modelo de concurrencia por paso de mensajes
+%
+% Ejemplos
+%
+% Implementado por: Harold Achicanoy
+
+declare S P in
+{NewPort S P}
+{Browse S} % S: variable sin ligar
+{Send P a} % Enviar mensaje "a" por el puerto P
+{Send P b} % Enviar mensaje "b" por el puerto P
+% Ellos aparecen en el flujo S
+{Browse P} % P es un puerto
