@@ -10,6 +10,8 @@ TITLE-ABS-KEY("recognition") AND TITLE-ABS-KEY("landrace")
 (TITLE-ABS-KEY("cropland mapping") OR TITLE-ABS-KEY(remote AND sensing)) AND TITLE-ABS-KEY("common bean")
 (TITLE-ABS-KEY("cropland mapping") OR TITLE-ABS-KEY("remote sensing")) AND TITLE-ABS-KEY("common bean")
 
+TITLE-ABS-KEY("bean cropland mapping")
+
 vegetation or crop type
 
 SRCTITLE para filtrar por revistas
@@ -29,3 +31,5 @@ Mate
 -topoWet
 
 [paper]-Soares et al, Crop area estimate from original spatial resolution
+
+Fractal Dimension of Irregular Region of Interest Application to Corn Phenology Characterization
