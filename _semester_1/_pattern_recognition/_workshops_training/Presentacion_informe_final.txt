@@ -1,0 +1,15 @@
+Reconomiento de patrones - Revisión de temas
+
+Estadística Bayesiana
+- Incluir información de expertos
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Documento de reporte para Pattern Recognition
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Parte I
+Introducción sobre el problema y descripción de las técnicas usadas
+
+Parte II
+Resultados: validación de resultados
