@@ -1,20 +1,28 @@
-% Punto1: Implementando puertos con celdas
+% Punto 1: Implementando puertos con celdas
 % Implemented by: Harold Achicanoy
 % MPP 2017-2
 
 % OPERACIONES BASICAS DE LOS PUERTOS
 % {NuevoPuerto S P}; S: flujo; P: puerto
-% {Enviar P X}; P: puerto; X: mensaje a ser enviado por el puerto
+% {Enviar P X}; P: puerto; X: mensaje a ser enviado
 
 declare
 fun {NuevoPuerto S}
-   P = {NewCell nil} % P: celda interna que simula el puerto
-   proc {Enviar P X}
-      Z in P:=@P|X|Z
+   P = {NewCell S} % P: celda que simula el puerto
+   proc {Enviar X} % {Enviar P X}
+      %P:=@P|X
+      %{Browse @P}
+      Z Ant in {Exchange P Ant Z} % X: valor a ser enviado
+      Ant=X|Z
+      % Z: variable sin ligar
+      %{Browse @P}
    end
 in
-   proc {$ Msj}
-      case Msj of enviar(X) then {Browse run#enviar#X}{Enviar P X} end
+   proc {$ Msj} % Invocacion del procedimiento Enviar
+      case Msj
+      of enviar(X) then
+	 {Enviar X}%{Browse run#enviar#X}{Enviar X}
+      end
    end
 end
 
@@ -26,9 +34,7 @@ end
 
 declare S P
 P = {NuevoPuerto S}
-{Browse S}
-{Browse P}
 {Enviar P a}
-{Browse S}
 {Enviar P b}
-{Browse S}
+{Enviar P c}
+{Enviar P a}

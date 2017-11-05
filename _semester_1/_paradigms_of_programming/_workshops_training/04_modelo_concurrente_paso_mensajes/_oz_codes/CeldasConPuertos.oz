@@ -1,4 +1,4 @@
-% Punto2: Implementando celdas con puertos
+% Punto 2: Implementando celdas con puertos
 % Implemented by: Harold Achicanoy
 % MPP 2017-2
 
@@ -23,8 +23,10 @@ fun {NuevaCelda X}
 in
    proc {$ Msj}
       case Msj
-      of acceder(C) then {Browse run#acceder#X}{Acceder X C}
-      [] asignar(X) then {Browse run#asignar#C}{Asignar X C}
+      of acceder(C) then
+	 {Browse run#acceder#X}{Acceder X C}
+      [] asignar(X) then
+	 {Browse run#asignar#C}{Asignar X C}
       end
    end
 end
