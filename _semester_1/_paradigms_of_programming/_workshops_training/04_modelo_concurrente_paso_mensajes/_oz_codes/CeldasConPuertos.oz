@@ -7,17 +7,26 @@
 % {Acceder X C}; X: nueva variable; C: contenido de la celda
 % {Asignar X C}; X: valor a ser contenido; C: celda
 
+% Abstraccion NuevoObjetoPuerto con estado
+declare
+fun {NuevoObjetoPuerto Inic Fun}
+   Sen Ssal in
+   thread {FoldL Sen Fun Inic Ssal} end
+   {NewPort Sen}
+end
+
+
 declare
 fun {NuevaCelda X}
    C={NewPort X}
-   % {Send C X}
    proc {Acceder X C}
       % Simular el comportamiento de X=@C
+      % Liga X con el contenido actual de la celda C
       X=C
    end
-   proc {Asignar X C}
+   proc {Asignar X}
       % Simular el comportamiento de C:=X
-      % C=X
+      % Coloca a X como el contenido nuevo de la celda C
       {Send C X}
    end
 in
@@ -26,7 +35,7 @@ in
       of acceder(C) then
 	 {Browse run#acceder#X}{Acceder X C}
       [] asignar(X) then
-	 {Browse run#asignar#C}{Asignar X C}
+	 {Browse run#asignar#C}{Asignar X}
       end
    end
 end
