@@ -46,10 +46,10 @@ in % Envio de mensajes por 4 Clientes
    thread {ForAll L4 proc {$ X} {Forward X} {Delay 1000} end} end
 end
 
+%% Prueba
 declare
 L1=a|c|_
 L2=b|c|_
 L3=a|_
 L4=a|a|b|c|_
-
 {Browse {Merge L1 L2 L3 L4}}

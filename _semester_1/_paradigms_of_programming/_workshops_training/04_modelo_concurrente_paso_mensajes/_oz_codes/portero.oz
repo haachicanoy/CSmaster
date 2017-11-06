@@ -2,28 +2,16 @@
 % Implemented by: Harold Achicanoy
 % MPP 2017-2
 
-% Funcion Portero
-declare
-fun {Portero N}
-   proc {GetIn N} end
-   proc {GetOut N} end
-   proc {GetCount N} end
-in
-   proc {$ Msj}
-      case Msj
-      of getIn(N) then {GetIn N}
-      [] getOut(N) then {GetOut N}
-      [] getCount(N) then {GetCount N}
-      end
-   end
-end
-
 % Abstraccion NuevoObjetoPuerto
 declare
-fun {NuevoObjetoPuerto Comp Inic}
+fun {NuevoObjetoPuerto Inic}
    proc {MsgLoop S1 Estado}
       case S1 of Msg|S2 then
-	 {MsgLoop S2 {Comp Msg Estado}}
+	 case Msg % Adicion de funciones para generar el conteo
+	 of getIn(N) then {MsgLoop S2 Estado+N}
+	 [] getOut(N) then {MsgLoop S2 Estado-N}
+	 [] getCount(N) then N=Estado {MsgLoop S2 Estado}
+	 end
       [] nil then skip
       end
    end
@@ -33,5 +21,16 @@ in
    {NewPort Sin}
 end
 
-declare Inic
-{NuevoObjetoPuerto Portero Inic}
+%% Prueba
+declare
+Portero={NuevoObjetoPuerto 0} X Y Z
+{Browse X#Y#Z}
+{Send Portero getIn(5)}
+{Send Portero getOut(2)}
+{Send Portero getCount(X)}
+{Send Portero getIn(2)}
+{Send Portero getOut(5)}
+{Send Portero getCount(Y)}
+{Send Portero getIn(16)}
+{Send Portero getOut(4)}
+{Send Portero getCount(Z)}
