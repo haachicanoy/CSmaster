@@ -25,6 +25,16 @@ Envolver Desenvolver
 
 declare
 fun {NuevaHeredarDe CB ListC}
+   case ListC of nil then
+      c(metodos:MCB atrbs:ACB)={Desenvolver CB}
+      {Envolver c(metodos:MCB
+		  atrbs:ACB)}
+   [] H1|T1 then
+      if {Member H1 L2} then {Union T1 L2}
+      else H1|{Union T1 L2} end
+   end
+
+   
    M A MA in
    c(metodos:M atrbs:A)={ForAll {Desenvolver ListC}}
    %c(metodos:M1 atrbs:A1)={Desenvolver C1}
