@@ -44,20 +44,9 @@ end
 % For implementing
 
 %% Creación de las funciones Envolver y Desenvolver
-%Envolver Desenvolver
-%{NuevoEmpacador Envolver Desenvolver}
 declare
-fun {Envolver X}
-   local Llave={NewName} in
-      {Chunk.new envolver(Llave:X)}
-   end
-end
-fun {Desenvolver W}
-   local Llave in
-      try W.Llave catch _ then raise error(desenvolver(W)) end end
-   end
-end
-
+Envolver Desenvolver
+{NuevoEmpacador Envolver Desenvolver}
 
 %% Función para la construcción de objetos a partir de clases
 %% No use el New predefinido
@@ -150,9 +139,9 @@ local Contador Disminuir Restaurar ClaseResultado Obj
       Restaurar = {Envolver c(metodos:TablaDeMetodos atrbs:Atrbs)}
    end
 in
-   ClaseResultado = {NuevaHeredarDe Contador [Disminuir Restaurar]}
+   % ClaseResultado = {NuevaHeredarDe Contador [Disminuir Restaurar]}
 % Esto se puede lograr con la función HeredarDe tomada del libro
-%  ClaseResultado = {HeredarDe Contador Disminuir Restaurar}
+   ClaseResultado = {HeredarDe Contador Disminuir Restaurar}
 % Descomente la línea anterior y comente la línea que invoca NuevaHeredarDe
 % para ver los resultados esperados.
    Obj = {Nuevo ClaseResultado inic(10)}
