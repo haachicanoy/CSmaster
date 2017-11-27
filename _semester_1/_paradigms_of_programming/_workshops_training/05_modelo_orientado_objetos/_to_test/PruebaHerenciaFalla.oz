@@ -64,7 +64,6 @@ in
    Obj
 end
 
-
 % Un ejemplo para probar la herencia múltiple.
 % Debe fallar porque hay un método presente
 % en las superclases Disminuir y DisminuirMul,
