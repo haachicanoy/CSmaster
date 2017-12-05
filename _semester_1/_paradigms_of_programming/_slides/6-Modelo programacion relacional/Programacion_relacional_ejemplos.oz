@@ -15,7 +15,8 @@ fun {SolStep S Rest}
    case {Space.ask S}
    of failed then Rest
    [] succeeded then {Space.merge S}|Rest
-   [] alternatives(N) then {SolLoop S 1 N Rest}
+   [] alternatives(N) then
+      {SolLoop S 1 N Rest}
    end
 end
 
@@ -47,6 +48,17 @@ in
    {TouchAll L}
    L
 end
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Ejemplo numeros de un digito
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+declare
+fun {Digito}
+   choice 0 [] 1 [] 2 [] 3 [] 4 [] 5 [] 6 [] 7 [] 8 [] 9 end
+end
+
+{Browse {SolveAll Digito}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Ejemplo escogencia de pinta
