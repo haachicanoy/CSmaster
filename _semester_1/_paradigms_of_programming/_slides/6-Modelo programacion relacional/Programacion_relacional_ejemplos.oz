@@ -1,4 +1,4 @@
-% Modelo de programación relacional
+% Modelo de programacion relacional
 % Ejemplos
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
