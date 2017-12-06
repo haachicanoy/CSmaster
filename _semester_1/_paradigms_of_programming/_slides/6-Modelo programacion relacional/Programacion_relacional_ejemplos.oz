@@ -133,17 +133,17 @@ end
 
 % Punto 2
 declare
+proc{Aux H T Minimo}
+   case T of nil then Minimo=H
+   [] Htail|Ttail then MinimoTemp in
+      {Aux Htail Ttail MinimoTemp}
+      {Menor H MinimoTemp Minimo}
+   end
+end
+
 proc {PMinimo Lista Minimo}
    case Lista of nil then Minimo=nil
-   [] H|T then
-      case T of nil then Minimo=T
-      [] H|Ttail then
-	 MinimoTemp
-      in
-	 {PMinimo Ttail MinimoTemp}
-	 Minimo={Menor H MinimoTemp}
-      end
-   end
+   [] H|T then {Aux H T Minimo} end      
 end
 
 fun {MinimoLista L}
@@ -153,37 +153,3 @@ fun {MinimoLista L}
 end
 {Browse {SolveAll {MinimoLista [t(d 2) t(b 3)]}}}
 {Browse {SolveAll {MinimoLista [t(d 2) t(b 3) t(c 4) t(a 2) t(e 5)]}}}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-declare
-proc {PMinimo Lista Minimo}
-   NList
-in
-   case Lista of nil then Minimo=nil
-   [] H|T then
-      Minimo={Menor H T.1}
-      NList={Append Minimo T.2}
-      {Browse NList}
-      %Minimo={PMinimo NList}
-      %case T of nil then Minimo=T
-	% [] H|T then Minimo={Menor H T}
-      %end
-   end
-end
