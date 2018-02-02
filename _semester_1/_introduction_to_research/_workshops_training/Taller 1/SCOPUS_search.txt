@@ -1,3 +1,21 @@
+## SCOPUS search
+
+## Keywords: cropland mapping, classification algorithms, 
+
+## Specific searches
+## Remote sensing for cropland mapping
+TITLE-ABS-KEY("cropland mapping") AND TITLE-ABS-KEY("remote sensing")
+Number of results: 25
+TITLE-ABS-KEY("cropland mapping") AND TITLE-ABS-KEY(classification)
+Number of results: 31
+
+
+## Artificial inteligence, machine learning, classification algorithms on image recognition
+TITLE-ABS-KEY("image classification") AND TITLE-ABS-KEY("remote sensing")
+
+## Landraces of common bean
+
+
 1. Descriptores, palabras clave: image recognition, cropland mapping, remote sensing
 TITLE-ABS-KEY("cropland mapping") OR TITLE-ABS-KEY(image recognition) [AND]
 TITLE-ABS-KEY("cropland mapping") OR TITLE-ABS-KEY(remote sensing) OR TITLE-ABS-KEY("common bean") OR TITLE-ABS-KEY("image classification") [AND]
@@ -18,18 +36,7 @@ SRCTITLE para filtrar por revistas
 (TITLE-ABS-KEY("cropland mapping") OR TITLE-ABS-KEY("remote sensing")) AND SRCTITLE("IEEE Journal of selected topics in Applied Earth Observations and Remote Sensing")
 
 
-landrace mapping remote sensing
-
-
-2. Quienes son los investigadores
-3. Grupos de investigación nacional-internacional
-
-Mate
-
--embergerQ
--monthCountByTemp10
--topoWet
 
 [paper]-Soares et al, Crop area estimate from original spatial resolution
 
-Fractal Dimension of Irregular Region of Interest Application to Corn Phenology Characterization
+Fractal dimension of irregular region of interest application to corn phenology characterization
