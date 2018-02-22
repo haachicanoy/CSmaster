@@ -163,17 +163,19 @@ ggRGB(img_conv, 1, 2, 3, stretch = "lin", q = 0)
 
 
 # Generate Gaussian filter
-gaussian_filter <- function(x, y, sigma){
-  z <- (1/(2*pi*sigma^2)) * exp(-((x^2 + y^2)/(2*sigma^2)))
-  return(z)
-}
-for(i in 1:3){
-  for(j in 1:3){
-    print(gaussian_filter(x = i, y = j, sigma = 1))
+gaussian_filter <- function(sigma = 1, k.size = 5){
+  kernel <- matrix(data = NA, nrow = k.size, ncol = k.size, byrow = T)
+  indices <- 1:k.size-median(1:k.size)
+  for(i in 1:length(indices)){
+    for(j in 1:length(indices)){
+      kernel[i, j] <- (1/(2*pi*sigma^2)) * exp(-((indices[i]^2 + indices[j]^2)/(2*sigma^2)))
+    }
   }
+  return(kernel)
 }
-
-
+kernel <- gaussian_filter(sigma = 3, k.size = 3)
+img_conv <- image_convolution(img = img, kernel = kernel)
+ggRGB(img_conv, 1, 2, 3, stretch = "lin", q = 0)
 
 # setwd("E:/Buenas-1342/Iguales/P_abajo")
 # photos <- list.files(path = ".", full.names = T)
