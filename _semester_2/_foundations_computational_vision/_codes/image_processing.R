@@ -16,6 +16,7 @@ library(imager)
 library(schoolmath)
 
 photos <- list.files(path = "./photos", full.names = T)
+photos <- list.files(path = "./segmented_photos", full.names = T)
 
 # Read images: identify format
 image_read <- function(file = "./photos/IMG_5901.JPG"){
@@ -62,12 +63,12 @@ image_sampling <- function(img = img){
   b <- raster::raster(img_c3) # Blue
   img_r <- raster::brick(r, g, b)
   names(img_r) <- c("r", "g", "b")
-  ggRGB(img_r, 1, 2, 3, stretch = "lin", q = 0)
   
   return(img_r)
   
 }
 img_s <- image_sampling(img = img)
+ggRGB(img_s, 1, 2, 3, stretch = "lin", q = 0)
 
 
 # Quantization
@@ -94,24 +95,30 @@ image_quantization <- function(img = img){
   img_r <- raster::brick(r, g, b)
   names(img_r) <- c("r", "g", "b")
   
-  ggRGB(img_r, 1, 2, 3, stretch = "lin", q = 0)
-  
   return(img_r)
   
 }
 img_q <- image_quantization(img = img)
-
+ggRGB(img_q, 1, 2, 3, stretch = "lin", q = 0)
 
 # Convolution
-values = matrix
 generate_kernel <- function(values = values, size = 3){
   kernel <- matrix(data = values, nrow = size, ncol = size, byrow = T)
   plot(raster::raster(kernel))
   return(kernel)
 }
+# Sharpen
 kernel <- generate_kernel(values = c(0, -1, 0,
                                      -1, 5, -1,
                                      0, -1, 0), size = 3)
+# Blur
+kernel <- generate_kernel(values = c(0.0625, 0.125, 0.0625,
+                                     0.125, 0.25, 0.125,
+                                     0.0625, 0.125, 0.0625), size = 3)
+# Bottom sobel
+kernel <- generate_kernel(values = c(-1, -2, -1,
+                                     0, 0, 0,
+                                     1, 2, 1), size = 3)
 image_convolution <- function(img = img, kernel = kernel){
   
   k.size <- ncol(kernel)
@@ -145,15 +152,26 @@ image_convolution <- function(img = img, kernel = kernel){
   r <- raster::raster(img_conv1) # Red
   g <- raster::raster(img_conv2) # Green
   b <- raster::raster(img_conv3) # Blue
-  img_conv3 <- raster::brick(r, g, b)
+  img_conv <- raster::brick(r, g, b)
   names(img_conv) <- c("r", "g", "b")
-  ggRGB(img_conv3, 1, 2, 3, stretch = "lin", q = 0)
   
   return(img_conv)
   
 }
 img_conv <- image_convolution(img = img, kernel = kernel)
+ggRGB(img_conv, 1, 2, 3, stretch = "lin", q = 0)
 
+
+# Generate Gaussian filter
+gaussian_filter <- function(x, y, sigma){
+  z <- (1/(2*pi*sigma^2)) * exp(-((x^2 + y^2)/(2*sigma^2)))
+  return(z)
+}
+for(i in 1:3){
+  for(j in 1:3){
+    print(gaussian_filter(x = i, y = j, sigma = 1))
+  }
+}
 
 
 
