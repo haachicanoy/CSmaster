@@ -117,57 +117,89 @@ kernel <- generate_kernel(values = c(0, -1, 0,
 kernel <- generate_kernel(values = c(0.0625, 0.125, 0.0625,
                                      0.125, 0.25, 0.125,
                                      0.0625, 0.125, 0.0625), size = 3)
-# Bottom sobel
-kernel <- generate_kernel(values = c(-1, -2, -1,
-                                     0, 0, 0,
-                                     1, 2, 1), size = 3)
 # Mean filter
 kernel <- generate_kernel(values = c(1/9, 1/9, 1/9,
                                      1/9, 1/9, 1/9,
                                      1/9, 1/9, 1/9), size = 3)
 
 
-image_convolution <- function(img = img, kernel = kernel){
+image_convolution <- function(img = img, kernel = kernel, rgb = "yes"){
   
   k.size <- ncol(kernel)
   
-  img.1 <- img[,,1]
-  img.2 <- img[,,2]
-  img.3 <- img[,,3]
-  
-  img_conv1 <- img.1; img_conv1[] <- NA
-  img_conv2 <- img.2; img_conv2[] <- NA
-  img_conv3 <- img.3; img_conv2[] <- NA
-  
-  # as.numeric(img[,,1][1:2, 1:2]) %*% as.numeric(kernel)
-  # as.numeric(img[,,1][1:3, 1:3]) %*% as.numeric(kernel)
-  
-  range1 <- seq(1, dim(img_conv1)[1]-(k.size-1))
-  range2 <- seq(1, dim(img_conv1)[2]-(k.size-1))
-  
-  for(i in range1){
+  if(rgb == "yes"){
     
-    for(j in range2){
+    img.1 <- img[,,1]
+    img.2 <- img[,,2]
+    img.3 <- img[,,3]
+    
+    img_conv1 <- img.1; img_conv1[] <- NA
+    img_conv2 <- img.2; img_conv2[] <- NA
+    img_conv3 <- img.3; img_conv2[] <- NA
+    
+    # as.numeric(img[,,1][1:2, 1:2]) %*% as.numeric(kernel)
+    # as.numeric(img[,,1][1:3, 1:3]) %*% as.numeric(kernel)
+    
+    range1 <- seq(1, dim(img_conv1)[1]-(k.size-1))
+    range2 <- seq(1, dim(img_conv1)[2]-(k.size-1))
+    
+    for(i in range1){
       
-      img_conv1[median(i:(i+(k.size-1))), median(j:(j+(k.size-1)))] <- as.numeric(img.1[i:(i+(k.size-1)), j:(j+(k.size-1))]) %*% as.numeric(kernel)
-      img_conv2[median(i:(i+(k.size-1))), median(j:(j+(k.size-1)))] <- as.numeric(img.2[i:(i+(k.size-1)), j:(j+(k.size-1))]) %*% as.numeric(kernel)
-      img_conv3[median(i:(i+(k.size-1))), median(j:(j+(k.size-1)))] <- as.numeric(img.3[i:(i+(k.size-1)), j:(j+(k.size-1))]) %*% as.numeric(kernel)
+      for(j in range2){
+        
+        img_conv1[median(i:(i+(k.size-1))), median(j:(j+(k.size-1)))] <- as.numeric(img.1[i:(i+(k.size-1)), j:(j+(k.size-1))]) %*% as.numeric(kernel)
+        img_conv2[median(i:(i+(k.size-1))), median(j:(j+(k.size-1)))] <- as.numeric(img.2[i:(i+(k.size-1)), j:(j+(k.size-1))]) %*% as.numeric(kernel)
+        img_conv3[median(i:(i+(k.size-1))), median(j:(j+(k.size-1)))] <- as.numeric(img.3[i:(i+(k.size-1)), j:(j+(k.size-1))]) %*% as.numeric(kernel)
+        
+      }
       
     }
     
+    r <- raster::raster(t(img_conv1)) # Red
+    g <- raster::raster(t(img_conv2)) # Green
+    b <- raster::raster(t(img_conv3)) # Blue
+    img_conv <- raster::brick(r, g, b)
+    names(img_conv) <- c("r", "g", "b")
+    
+    return(img_conv)
+    
+  } else {
+    if(rgb == "no"){
+      
+      img.2 <- img[,,2]
+      
+      img_conv2 <- img.2; img_conv2[] <- NA
+      
+      # as.numeric(img[,,1][1:2, 1:2]) %*% as.numeric(kernel)
+      # as.numeric(img[,,1][1:3, 1:3]) %*% as.numeric(kernel)
+      
+      range1 <- seq(1, dim(img_conv2)[1]-(k.size-1))
+      range2 <- seq(1, dim(img_conv2)[2]-(k.size-1))
+      
+      for(i in range1){
+        
+        for(j in range2){
+          
+          img_conv2[median(i:(i+(k.size-1))), median(j:(j+(k.size-1)))] <- as.numeric(img.2[i:(i+(k.size-1)), j:(j+(k.size-1))]) %*% as.numeric(kernel)
+          
+        }
+        
+      }
+      
+      g <- raster::raster(t(img_conv2)) # Green
+      img_conv <- g
+      names(img_conv) <- c("g")
+      
+      return(img_conv)
+      
+    }
   }
   
-  r <- raster::raster(t(img_conv1)) # Red
-  g <- raster::raster(t(img_conv2)) # Green
-  b <- raster::raster(t(img_conv3)) # Blue
-  img_conv <- raster::brick(r, g, b)
-  names(img_conv) <- c("r", "g", "b")
-  
-  return(img_conv)
   
 }
-img_conv <- image_convolution(img = img, kernel = kernel)
-ggRGB(img_conv, 1, 2, 3, stretch = "lin", q = 0)
+img_conv <- image_convolution(img = img, kernel = kernel, rgb = "no")
+# ggRGB(img_conv, r = NULL, g = 1, b = NULL, stretch = "lin", q = 0)
+# ggRGB(img_conv, 1, 2, 3, stretch = "lin", q = 0)
 
 
 # Generate Gaussian filter
@@ -184,10 +216,41 @@ gaussian_filter <- function(sigma = 1, k.size = 5){
 kernel <- gaussian_filter(sigma = 3, k.size = 7)
 plot(raster(kernel))
 img_conv <- image_convolution(img = img, kernel = kernel)
-ggRGB(img_conv, 1, 2, 3, stretch = "lin", q = 0)
+ggRGB(img_conv, r = NULL, g = 1, b = NULL, stretch = "lin", q = 0)
 
 # For implementing: sigma, Nagao-Matsuyama, impulse noise and median filter
 
+# Gaussian filter
+kernel <- gaussian_filter(sigma = 1, k.size = 5)
+img_gaussian <- image_convolution(img = img, kernel = kernel, rgb = "no")
+img_gaussian <- 
+# X sobel
+kernel <- generate_kernel(values = c(-1, 0, 1,
+                                     -2, 0, 2,
+                                     -1, 0, 1), size = 3)
+Sx <- image_convolution(img = img_gaussian, kernel = kernel, rgb = "no")
+# Y sobel
+kernel <- generate_kernel(values = c(-1, -2, -1,
+                                     0, 0, 0,
+                                     1, 2, 1), size = 3)
+Sy <- image_convolution(img = img, kernel = kernel, rgb = "no")
+
+# Magnitud del gradiente
+G1 <- abs(Sx) + abs(Sy)
+plot(G1)
+G2 <- sqrt((Sx * Sx) + (Sy * Sy))
+plot(G2)
+
+dim(as.matrix(G))
+
+EBImage::otsu(as.matrix(G), range = c(0, 1), levels = 1064)
+library(autothresholdr)
+otsu <- autothresholdr::auto_thresh(int_arr = as.matrix(G)[-c(1,224),-c(1, 224)], method = "Otsu")
+G[G[] <= otsu] <- 0
+G[G[] > otsu] <- 1
+plot(G)
+
+plot(as.numeric(names(table(G1[]))), table(G1[]), ty = "h")
 
 # COLOR TRANSFORMATIONS: RGB to CIE XYZ
 rgb2xyz <- function(img = img){
@@ -273,4 +336,65 @@ if(require(gridExtra)){
   plots <- lapply(1:3, function(x) ggR(rpc$map, x, geom_raster = TRUE))
   grid.arrange(plots[[1]], plots[[2]], plots[[3]], ncol = 2)
 }
+
+# ======================================================================================== #
+# Edge detector
+# ======================================================================================== #
+
+# 1. Denoising
+library(imager)
+im <- grayscale(boats) %>% isoblur(2)
+
+# 2. Computing the image gradient, its magnitude and angle
+gr <- imgradient(im, "xy")
+plot(gr, layout = "row")
+
+# Gradient magnitude
+mag <- with(gr, sqrt(x^2+y^2))
+plot(mag)
+
+# Gradient angle
+ang <- with(gr, atan2(y, x))
+plot(ang)
+
+cs <- scales::gradient_n_pal(c("red", "darkblue", "lightblue", "red"), c(-pi, -pi/2, pi/2, pi))
+plot(ang, colourscale = cs, rescale = FALSE)
+
+
+# ======================================================================================== #
+# Morphological operations
+# ======================================================================================== #
+library(EBImage)
+
+grayscale(boats) %>% plot
+
+x = readImage(system.file("images", "shapes.png", package="EBImage"))
+kern = makeBrush(5, shape='diamond')  
+
+display(x)
+display(kern, title='Structuring element')
+display(erode(x, kern), title='Erosion of x')
+display(dilate(x, kern), title='Dilatation of x')
+
+## makeBrush
+display(makeBrush(99, shape='diamond'))
+display(makeBrush(99, shape='disc', step=FALSE))
+display(2000*makeBrush(99, shape='Gaussian', sigma=10))
+
+# Texture descriptors
+
+require(raster)
+# Calculate GLCM textures using default 90 degree shift
+textures_shift1 <- glcm(raster(L5TSR_1986, layer=1))
+plot(textures_shift1)
+
+# Calculate GLCM textures over all directions
+textures_all_dir <- glcm(raster(L5TSR_1986, layer=1),
+                         shift=list(c(0,1), c(1,1), c(1,0), c(1,-1)))
+plot(textures_all_dir)
+
+
+test <- glcm(x = as.matrix(im), shift=list(c(0,1), c(1,1), c(1,0), c(1,-1)))
+plot(test)
+
 
