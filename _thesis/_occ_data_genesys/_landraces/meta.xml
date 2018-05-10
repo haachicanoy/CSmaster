@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='utf-8'?>
+<archive xmlns="http://rs.tdwg.org/dwc/text/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://rs.tdwg.org/dwc/text/ http://rs.tdwg.org/dwc/text/tdwg_dwc_text.xsd">
+<core encoding="UTF-8" fieldsTerminatedBy="," linesTerminatedBy="\n" fieldsEnclosedBy="&quot;" ignoreHeaderLines="0">
+	<files><location>core.csv</location></files>
+	<id index="0" />
+	<field index="1" term="UUID"/>
+	<field index="2" term="http://purl.org/germplasm/germplasmType#wiewsInstituteID"/>
+	<field index="3" term="http://purl.org/germplasm/germplasmTerm#germplasmIdentifier"/>
+	<field index="4" term="http://rs.tdwg.org/dwc/terms/genus"/>
+	<field index="5" term="http://rs.tdwg.org/dwc/terms/species"/>
+	<field index="6" term="orgCty"/>
+	<field index="7" term="acqSrc"/>
+	<field index="8" term="acqDate"/>
+	<field index="9" term="mlsStat"/>
+	<field index="10" term="available"/>
+	<field index="11" term="storage"/>
+	<field index="12" term="sampStat"/>
+	<field index="13" term="dublInst"/>
+	<field index="14" term="createdBy"/>
+	<field index="15" term="createdDate"/>
+	<field index="16" term="lastModifiedBy"/>
+	<field index="17" term="lastModifiedDate"/>
+	<field index="18" term="doi"/>
+</core>
+<extension encoding="UTF-8" fieldsTerminatedBy="," linesTerminatedBy="\n" fieldsEnclosedBy="&quot;" ignoreHeaderLines="0">
+	<files><location>names.csv</location></files>
+	<coreid index="0" />
+	<field index="1" term="instCode"/>
+	<field index="2" term="name"/>
+	<field index="3" term="aliasType"/>
+	<field index="4" term="lang"/>
+	<field index="5" term="version"/>
+</extension>
+<extension encoding="UTF-8" fieldsTerminatedBy="," linesTerminatedBy="\n" fieldsEnclosedBy="&quot;" ignoreHeaderLines="0">
+	<files><location>geo.csv</location></files>
+	<coreid index="0" />
+	<field index="1" term="latitude"/>
+	<field index="2" term="longitude"/>
+	<field index="3" term="elevation"/>
+	<field index="4" term="datum"/>
+	<field index="5" term="uncertainty"/>
+	<field index="6" term="method"/>
+	<field index="7" term="version"/>
+</extension>
+<extension encoding="UTF-8" fieldsTerminatedBy="," linesTerminatedBy="\n" fieldsEnclosedBy="&quot;" ignoreHeaderLines="0">
+	<files><location>coll.csv</location></files>
+	<coreid index="0" />
+	<field index="1" term="collMissId"/>
+	<field index="2" term="collNumb"/>
+	<field index="3" term="collDate"/>
+	<field index="4" term="collSrc"/>
+	<field index="5" term="collSite"/>
+	<field index="6" term="collCode"/>
+	<field index="7" term="collName"/>
+	<field index="8" term="collInstAddress"/>
+	<field index="9" term="version"/>
+</extension>
+</archive>
