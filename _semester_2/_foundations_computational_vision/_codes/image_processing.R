@@ -1,6 +1,7 @@
 # Foundations of computer vision: Image processing
 # By: Harold Achicanoy
 # 2018
+# Rehacer
 
 # R options
 g <- gc(); rm(list = ls()); 
