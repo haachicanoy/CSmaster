@@ -420,6 +420,7 @@ ggRGB(img_median_filter, r = NULL, g = 1, b = NULL, stretch = "lin", q = 0)
 
 ## Histogram slides
 ## 1.1). Histogram gray-scale
+img_gray <- imager::grayscale(im = img)
 imager::grayscale(im = img) %>% plot
 imager::grayscale(im = img) %>% hist(main = "Gray-levels histogram", prob = T)
 
